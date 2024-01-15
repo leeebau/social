@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-......" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+
+    <title>Producto</title>
+    <style>
+        
+        .producto {
+
+            width: 30%;
+            background-color: #ffffff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-to-cart-btn{
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: backgroun-color 0.3s ease;
+        }
+        .add-to-cart-btn:hover{
+            background-color: #0056b3;
+        }
+
+        .cart-icon{
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+
+<body>
+  
+
+    <div class="producto">
+        <h2>{{ producto.nombre }}</h2>
+        <p>Precio: ${{ producto.precio }}</p>
+        <p>{{ producto.descripcion }}</p>
+
+        <button class="add-to-cart-btn" id="add-to-cart-btn" data-product-id="{{ producto.id }}">
+            Añadir al carrito
+        </button>
+        
+    </div>
+
+</body>
+<script>
+    const addToCartButton = document.querySelector('.add-to-cart-btn');
+
+addToCartButton.addEventListener('click', function () {
+  const productoId = 1;  // Deberías obtener esto dinámicamente según tu lógica
+
+  // Realizar la solicitud al servidor para agregar el producto al carrito
+  fetch(`/agregar-carrito/${productoId}/`)
+    .then(response => response.json())
+    .then(data => {
+      // Manejar la respuesta JSON, por ejemplo, mostrar un mensaje al usuario
+      alert(`${data.message}:  C O R R E C T O.`);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+});
+</script>
+
+</html>
+
+
+
+

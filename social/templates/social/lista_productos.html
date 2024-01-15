@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+
+<head>
+    <title>Tu Tienda</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link rel="icon" type="image/png" href="{% static 'tienda.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'normalize.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <style>
+
+        .producto-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .producto {
+            width: 30%;
+            background-color: #ffffff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .producto a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .producto p {
+            font-size: 1em;
+            color: #555;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-head">
+        <nav class="main">
+            <h1>Lista de Productos</h1>
+        </nav>
+    </header>
+
+    <div class="main">
+        <nav class="second-nav">
+            <a class="feed" href="{% url 'feed' %}">Inicio 🏠</a>
+            {% if request.user.is_authenticated %}
+            <a class="profile" href="{% url 'profile' request.user.username %}">Mi Perfil</a>
+            {% endif %}
+        </nav>
+
+        <div class="producto-container">
+            {% for producto in productos %}
+            <div class="producto">
+                <a href="{% url 'detalle_producto' producto.id %}">{{ producto.nombre }}</a>
+                <p>Precio: ${{ producto.precio }}</p>
+                <p>{{ producto.descripcion }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+
+
+    <footer>
+		<div class="row">
+			<p>TECNOLOGICO DE ESTUDIOS SUPERIORES DE CHIMALHUACAN<br>hecha por: <a href="http://teschistore.infinityfreeapp.com/?i=2#about ">ing. Guapo Lule</a></p>
+		</div>
+	</footer>
+</body>
+
+</html>
+
